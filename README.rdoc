@@ -1,28 +1,23 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Appointment API technical challenge
 
-Things you may want to cover:
+Instructions:
 
-* Ruby version
+The attached, comma-delimited file contains some appointment data. Please use the data to create a database-driven RESTful web API using Ruby. Sinatra or Rails app is preferred. The API should expose the following 4 methods to facilitate CRUD operations on the appointment resources.
 
-* System dependencies
+- Create
+- Update
+- Delete
+- List (should accept optional start/end time parameters to filter data)
 
-* Configuration
+When creating or updating a resource, it should only be considered valid if the start and end times are in the future and do not overlap an existing appointment on the same day. All operations should return valid JSON along with the appropriate HTTP status codes.
 
-* Database creation
+When you are ready to share your work, please send a url that we can use to access the API along with the source code (github repo link is preferred but zip file is acceptable). Also, please provide brief documentation on the API and describe your choice of technologies (e.g. web framework, database, testing framework etc...)
 
-* Database initialization
+We are happy to receive a response as soon as it is complete, but would like to receive it within 1 week. However, we understand that we are asking for a significant commitment of time with this task. If you are unable to complete it within 1 week, please don’t hesitate to let me know and we can work something out.
 
-* How to run the test suite
+If you have any questions at all – about the task, the job in general, etc. – please do not hesitate to contact us.
 
-* Services (job queues, cache servers, search engines, etc.)
+We are excited to get to know you better and look forward to see how you solve problems and write code.
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
