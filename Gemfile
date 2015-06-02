@@ -44,3 +44,6 @@ group :development, :test do
 end
 
 gem 'rspec-rails'
+gem 'grape'
+gem 'json'
+

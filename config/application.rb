@@ -22,5 +22,10 @@ module SampleApiAppointments
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    #partial regular expression constants:
+    $RE_SIMPLE_NAME = /\A(\w+)(\s+\w+)*\z/
+    $RE_SIMPLE_COMMENT = /(\A(\w+)(\s+\w+)*\z)*/
+
   end
 end
