@@ -1,14 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 require 'smarter_csv'
 
-def load_appointments(file_path, datetime_format, zone_name, verbose_errors)
+def load_appointments(file_path, zone_name, verbose_errors)
   when_started = DateTime.now
   when_started_str = "Started: #{when_started}"
   log_path = file_path + '.log'
@@ -67,16 +59,15 @@ def load_appointments(file_path, datetime_format, zone_name, verbose_errors)
   File.open(error_path, 'a') {|f| f << when_duration_str }
 end
 
-month_day_year_24hr_min = '%m/%d/%Y %k:%M'
-zone_name = 'Hawaii' # 'Hawaii' # 'Eastern Time (US & Canada)' # Set to applicable timezone. For testing, we are setting to 'Hawaii', since we set "config.time_zone = 'Eastern Time (US & Canada)'" in 'config/application.rb'.
-verbose_errors = false # true # false
+zone_name = 'Hawaii' # Set to applicable timezone. For testing, we are setting to 'Hawaii', since we set "config.time_zone = 'Eastern Time (US & Canada)'" in 'config/application.rb'.
+verbose_errors = false
 
 begin
   file_path = 'db/appointments.yr2013.csv'
-  load_appointments(file_path, month_day_year_24hr_min, zone_name, verbose_errors)
+  load_appointments(file_path, zone_name, verbose_errors)
 
   file_path = 'db/appointments.yr2015.csv'
-  load_appointments(file_path, month_day_year_24hr_min, zone_name, verbose_errors)
+  load_appointments(file_path, zone_name, verbose_errors)
 rescue => e
   msg = ("\n== Error:#{e.message}")
   msg << ("\n\n== Error Backtrace:\n" + e.backtrace.join("\n") + "\n")
