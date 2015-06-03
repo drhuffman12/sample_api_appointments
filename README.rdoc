@@ -21,3 +21,11 @@ If you have any questions at all â€“ about the task, the job in general, etc. â€
 
 We are excited to get to know you better and look forward to see how you solve problems and write code.
 
+
+* My choice of technologies for the implemention:
+  - web framework: Ruby on Rails (my favorite)
+  - database: sqlite (simple, typical RoR db for small apps)
+  - testing framework: RSpec (although testing code is not yet completed)
+  - api framework: Grape (nice, simple, easy API generators)
+  - CSV import: smarter_csv (also nice and simple)
+
