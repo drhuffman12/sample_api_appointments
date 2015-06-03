@@ -8,8 +8,8 @@ class ApiErrorHandler < Grape::Middleware::Base
       case e.class.name
         when 'ActiveRecord::RecordNotFound'
           error_code = 404
-        # when 'Mongoid::Errors::Validations'
-        #   error_code = 400
+        when 'ActiveRecord::RecordInvalid'
+          error_code = 400
         when 'Grape::Exceptions::ValidationErrors'
           error_code = 400
         when 'AppointmentApi::DuplicateKeysError'
