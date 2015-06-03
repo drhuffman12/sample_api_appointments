@@ -136,8 +136,8 @@
     <span class="ruby-keyword">case</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>
       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ActiveRecord::RecordNotFound&#39;</span>
         <span class="ruby-identifier">error_code</span> = <span class="ruby-value">404</span>
-      <span class="ruby-comment"># when &#39;Mongoid::Errors::Validations&#39;</span>
-      <span class="ruby-comment">#   error_code = 400</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ActiveRecord::RecordInvalid&#39;</span>
+        <span class="ruby-identifier">error_code</span> = <span class="ruby-value">400</span>
       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Grape::Exceptions::ValidationErrors&#39;</span>
         <span class="ruby-identifier">error_code</span> = <span class="ruby-value">400</span>
       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;AppointmentApi::DuplicateKeysError&#39;</span>
