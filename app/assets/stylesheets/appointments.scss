@@ -1,3 +1,57 @@
 // Place all the styles related to the Appointments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+* { font-family: Helvetica, Arial;}
+
+table
+{
+  margin: 0.5em;
+  border-spacing: 0.4em;
+  border-collapse: separate; /* collapse */
+}
+
+.table-cell-buttons
+{
+  background: transparent;
+  border: 0em solid transparent;
+}
+
+tr:nth-child(even) {background: #f0f0f0}
+tr:nth-child(odd) {background: #FFF}
+
+th
+{
+  margin: 0.2em;
+  border: 0.1em solid gray;
+  padding: 0.4em;
+  background-color: lightgray;
+  vertical-align: top;
+}
+
+td
+{
+  margin: 0.2em;
+  border: 0.1em solid #cccccc;
+  padding: 0.4em;
+  //background-color: #f0f0f0;
+  vertical-align: top;
+}
+
+.button
+{
+  margin: 0.1em;
+  border: 0.1em solid gray;
+  padding: 0.1em;
+  background-color: lightgray;
+  color: black;
+}
+
+.button-dangerous
+{
+  margin: 0.1em;
+  border: 0.1em solid red;
+  padding: 0.1em;
+  background-color: pink;
+  color: black;
+}

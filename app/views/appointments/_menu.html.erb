@@ -1,0 +1,5 @@
+<%= (link_to 'List', appointments_path , {class: 'button'}) if ['edit','new','show'].include?(action_name) %>
+<%= (link_to 'New', new_appointment_path , {class: 'button'}) if ['index'].include?(action_name) %>
+<%= (link_to 'Show', @appointment , {class: 'button'}) if ['edit'].include?(action_name) %>
+<%= (link_to 'Edit', edit_appointment_path(@appointment) , {class: 'button'}) if ['show'].include?(action_name) %>
+<%= (link_to 'Delete', @appointment , {method: :delete, class: 'button-dangerous', data: { confirm: 'Are you sure?' }}) if ['edit','show'].include?(action_name) %>

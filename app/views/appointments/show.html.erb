@@ -1,3 +1,7 @@
+<%= render 'menu' %>
+
+<h1>Show Appointment</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -24,6 +28,3 @@
   <strong>Comments:</strong>
   <%= @appointment.comments %>
 </p>
-
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
