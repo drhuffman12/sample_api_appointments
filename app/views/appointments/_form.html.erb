@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  (Zone: <%= Time.zone.name %>)
+  <% start_of_next_hour = Time.now.end_of_hour + 1 %>
   <div class="field">
     <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
+    <%= f.datetime_select :start_time, :default => start_of_next_hour + 30.minutes %>
   </div>
   <div class="field">
     <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time %>
+    <%= f.datetime_select :end_time, :default => start_of_next_hour + 1.hour %>
   </div>
   <div class="field">
     <%= f.label :first_name %><br>

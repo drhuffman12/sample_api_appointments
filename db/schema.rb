@@ -14,13 +14,13 @@
 ActiveRecord::Schema.define(version: 20150601194834) do
 
   create_table "appointments", force: :cascade do |t|
-    t.datetime "start_time", default: '2015-06-03 04:30:00'
-    t.datetime "end_time",   default: '2015-06-03 05:00:00'
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "first_name"
     t.string   "last_name"
     t.text     "comments"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
