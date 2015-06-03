@@ -7,23 +7,25 @@ class Appointment < ActiveRecord::Base
   validate :start_time_is_valid_datetime
   validate :end_time_is_valid_datetime
 
-  validate :start_before_end
-  validate :start_after_now
-  validate :end_after_now
-  validate :start_does_not_overlap
-  validate :end_does_not_overlap
+  validate :start_should_be_in_future
+  validate :end_should_be_in_future
+  validate :start_should_be_before_end
+  validate :start_should_not_overlap_existing
+  validate :end_should_not_overlap_existing
 
   # not stated in requirements, but might be good to have:
-  validates :first_name, presence: true, format: { with: $RE_SIMPLE_NAME }
-  validates :last_name, presence: true, format: { with: $RE_SIMPLE_NAME }
-  validates :comments, format: { with: $RE_SIMPLE_COMMENT }
+  RE_SIMPLE_NAME = /\A(\w+)(\s+\w+)*\z/
+  RE_SIMPLE_COMMENT = /(\A(\w+)(\s+\w+)*\z)*/
+  validates :first_name, presence: true, format: { with: RE_SIMPLE_NAME }
+  validates :last_name, presence: true, format: { with: RE_SIMPLE_NAME }
+  validates :comments, format: { with: RE_SIMPLE_COMMENT }
 
   private
 
   def strip_outer_whitespace
-    first_name.strip!
-    last_name.strip!
-    comments.strip!
+    first_name.strip! unless first_name.nil?
+    last_name.strip! unless last_name.nil?
+    comments.strip! unless comments.nil?
   end
 
   def start_time_is_valid_datetime
@@ -31,38 +33,42 @@ class Appointment < ActiveRecord::Base
   end
 
   def end_time_is_valid_datetime
-    errors.add(:end_time, "must be a valid ActiveSupport::TimeWithZone! start_time.class: #{end_time.class}") unless end_time.is_a?(ActiveSupport::TimeWithZone)
+    errors.add(:end_time, "must be a valid ActiveSupport::TimeWithZone! end_time.class: #{end_time.class}") unless end_time.is_a?(ActiveSupport::TimeWithZone)
   end
 
-  def start_before_end
+  def start_should_be_before_end
     if (start_time && end_time)
-      errors.add(:end_time, "start_time should be before end_time") if (start_time > end_time)
+      errors.add(:start_time, "should be before end_time. start_time: '#{start_time}', end_time: '#{end_time}'") if (start_time > end_time)
     end
   end
 
-  def start_after_now
+  def start_should_be_in_future
     if (start_time)
-      # errors.add(:start_time, "start_time should be in future") if (start_time < Time.now)
-      errors.add(:start_time, "start_time should be in future") if (start_time < Time.now)
+      errors.add(:start_time, "should be in future. start_time: '#{start_time}'") if (start_time < Time.zone.now)
     end
   end
 
-  def end_after_now
+  def end_should_be_in_future
     if (end_time)
-      # errors.add(:start_time, "start_time should be in future") if (start_time < Time.now)
-      errors.add(:end_time, "end_time should be in future") if (end_time < Time.now)
+      errors.add(:end_time, "should be in future. end_time: '#{end_time}'") if (end_time < Time.zone.now)
     end
   end
 
-  def start_does_not_overlap
+  def start_should_not_overlap_existing
     if (start_time)
-      errors.add(:start_time, "start_time should not overlap existing records") if (Appointment.exists?(["(start_time <= ?) AND (? <= end_time)", start_time, start_time]))
+      if (Appointment.exists?(["(start_time <= ?) AND (? <= end_time) AND id != ?", start_time, start_time, id || 0]))
+        overlaps_with_records = Appointment.select('id').where(["(start_time <= ?) AND (? <= end_time) AND id != ?", start_time, start_time, id || 0])
+        errors.add(:start_time, "should not overlap existing records. Overlaps with record id's: " + overlaps_with_records.collect{ |r| r['id'] }.inspect)
+      end
     end
   end
 
-  def end_does_not_overlap
+  def end_should_not_overlap_existing
     if (end_time)
-      errors.add(:end_time, "end_time should not overlap existing records") if (Appointment.exists?(["(start_time <= ?) AND (? <= end_time)", end_time, end_time]))
+      if (Appointment.exists?(["(start_time <= ?) AND (? <= end_time) AND id != ?", end_time, end_time, id || 0]))
+        overlaps_with_records = Appointment.select('id').where(["(start_time <= ?) AND (? <= end_time) AND id != ?", end_time, end_time, id || 0])
+        errors.add(:end_time, "should not overlap existing records. Overlaps with record id's: " + overlaps_with_records.collect{ |r| r['id'] }.inspect)
+      end
     end
   end
   

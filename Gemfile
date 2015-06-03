@@ -46,4 +46,4 @@ end
 gem 'rspec-rails'
 gem 'grape'
 gem 'json'
-
+gem 'smarter_csv'

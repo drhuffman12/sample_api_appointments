@@ -1,5 +1,10 @@
 start_time,end_time,first_name,last_name,comments
-11/1/2010 1:00,11/1/2010 1:05,should,not load,
+11/1/2010 0:00,11/1/2015 0:05,should error,start_should_be_in_future,
+11/1/2015 0:00,11/1/2010 0:05,should error,end_should_be_in_future,
+11/1/2015 0:05,11/1/2015 0:00,should error,start_should_be_before_end,
+11/1/2015 0:05,11/1/2015 0:10,should load,ok,
+11/1/2015 0:09,11/1/2015 0:11,should error,start_should_not_overlap_existing,
+11/1/2015 0:04,11/1/2015 0:06,should error,end_should_not_overlap_existing,
 11/1/2015 7:00,11/1/2015 7:05,laurence,marcum,
 11/1/2015 9:30,11/1/2015 9:35,bayley,keller,
 11/1/2015 11:00,11/1/2015 11:05,brenda,hardy,
